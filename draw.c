@@ -34,13 +34,42 @@ void	custome_pixel_put(t_mlx_data *data, int x, int y, int color)
 	*(unsigned int *) dst = color;
 }
 
-static void	bresenham_algo(t_mlx_data my_mlx, int x1, int y1, int x2, int y2, int dx, int dy, int d)
+// static void	bresenham_algo(t_mlx_data my_mlx, int x1, int y1, int x2, int y2, int dx, int dy, int d)
+// {
+// 	int pk = 2 * dy - dx;
+// 	int	i;
+
+// 	i = -1;
+// 	while (++i <= dx)
+// 	{
+// 		x1 < x2 ? x1++ : x1--;
+// 		if (pk < 0)
+// 		{
+// 			if (d == 0)
+// 				custome_pixel_put(&my_mlx, x1, y1, 0xfcba03);
+// 			else
+// 				custome_pixel_put(&my_mlx, y1, x1, 0xfcba03);
+// 			pk = pk + 2 * dy;
+// 		}
+// 		else
+// 		{
+// 			y1 < y2 ? y1++ : y1--;
+// 			if (d == 0)
+// 				custome_pixel_put(&my_mlx, x1, y1, 0xfcba03);
+// 			else
+// 				custome_pixel_put(&my_mlx, y1, x1, 0xfcba03);
+// 			pk = pk + 2 * dy - 2 * dx;
+// 		}
+// 	}
+// }
+
+static void	bresenham_algo(t_mlx_data my_mlx, int x1, int y1, int x2, int y2, int *po, int d)
 {
-	int pk = 2 * dy - dx;
+	int pk = 2 * po[5] - po[4];
 	int	i;
 
 	i = -1;
-	while (++i <= dx)
+	while (++i <= po[4])
 	{
 		x1 < x2 ? x1++ : x1--;
 		if (pk < 0)
@@ -49,7 +78,7 @@ static void	bresenham_algo(t_mlx_data my_mlx, int x1, int y1, int x2, int y2, in
 				custome_pixel_put(&my_mlx, x1, y1, 0xfcba03);
 			else
 				custome_pixel_put(&my_mlx, y1, x1, 0xfcba03);
-			pk = pk + 2 * dy;
+			pk = pk + 2 * po[5];
 		}
 		else
 		{
@@ -58,26 +87,29 @@ static void	bresenham_algo(t_mlx_data my_mlx, int x1, int y1, int x2, int y2, in
 				custome_pixel_put(&my_mlx, x1, y1, 0xfcba03);
 			else
 				custome_pixel_put(&my_mlx, y1, x1, 0xfcba03);
-			pk = pk + 2 * dy - 2 * dx;
+			pk = pk + 2 * po[5] - 2 * po[4];
 		}
 	}
 }
 
 void	draw_from_p2p(t_mlx_data my_mlx, int *fp, int *sp, int color)
 {
-	int	i;
-	int	coordinates[5];
-	int	dx;
-	int	dy;
-	int	points[4];
-	double degree = 0.5;
+	int infos[6];
 
-	dx = abs(sp[0] - fp[0]);
-	dy = abs(sp[1] - fp[1]);
-	if (dx > dy)
-		bresenham_algo(my_mlx, fp[0], fp[1], sp[0], sp[1], dx, dy, 0);
-	else
-		bresenham_algo(my_mlx, fp[1], fp[0], sp[1], sp[0], dy, dx, 1);
+	infos[0] = fp[0];//x1
+	infos[1] = fp[1];//y1
+	infos[2] = sp[0];//x2
+	infos[3] = sp[1];//y2
+	infos[4] = abs(sp[0] - fp[0]);
+	infos[5] = abs(sp[1] - fp[1]);
+	if (infos[4] > infos[5])
+	{
+		bresenham_algo(my_mlx, fp[0], fp[1], sp[0], sp[1], infos, 0);
+		return ;
+	}
+	infos[4] = abs(sp[1] - fp[1]);
+	infos[5] = abs(sp[0] - fp[0]);
+	bresenham_algo(my_mlx, fp[1], fp[0], sp[1], sp[0], infos, 1);
 }
 
 static void	init_and_draw(t_mlx_data my_mlx, int arr[4][3])
@@ -102,19 +134,6 @@ void	init_draw(t_mlx_data my_mlx, t_points **points)
 	{
 		while (points[i] && points[i]->next && points[i]->next->bottom)
 		{
-			// arr[0][0] = points[i]->x;
-			// arr[0][1] = points[i]->y;
-			// arr[0][2] = points[i]->z;
-			// arr[1][0] = points[i]->next->x;
-			// arr[1][1] = points[i]->next->y;
-			// arr[1][2] = points[i]->next->z;
-			// arr[2][0] = points[i]->next->bottom->x;
-			// arr[2][1] = points[i]->next->bottom->y;
-			// arr[2][2] = points[i]->next->bottom->z;
-			// arr[3][0] = points[i]->bottom->x;
-			// arr[3][1] = points[i]->bottom->y;
-			// arr[3][2] = points[i]->bottom->z;
-
 			arr[0][0] = points[i]->x;
 			arr[0][1] = points[i]->y;
 			arr[0][2] = points[i]->color;

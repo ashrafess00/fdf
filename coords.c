@@ -34,7 +34,7 @@ void	add_node(t_points **head, int x, int y, char *num)
 	int color;
 	int	z;
 	
-	z = ft_atoi(ft_split(num, ',')[0]) * 10;
+	z = ft_atoi(ft_split(num, ',')[0]) * 3;
 	iso (&x, &y, z, 0.5);
 	if (ft_split(num, ',')[1])
 		color = ft_atoi(ft_split(num, ',')[1]);

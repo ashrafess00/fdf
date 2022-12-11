@@ -58,17 +58,17 @@ void	intiate_window(t_mlx_data *my_mlx)
 {
 	my_mlx->mlx = mlx_init();
 	my_mlx->win = mlx_new_window(my_mlx->mlx, my_mlx->img_w + 250, my_mlx->img_h + 250, "Afin allft");
-	// printf("%d", (*my_mlx).img_w);
 	my_mlx->img = mlx_new_image(my_mlx->mlx, my_mlx->img_w, my_mlx->img_h);
 	my_mlx->addr = mlx_get_data_addr(my_mlx->img, &my_mlx->bits_per_pixel, &my_mlx->line_length, &my_mlx->endian);
 }
 
-int	close_win(int key, t_mlx_data data)
+int	close_win(int key, t_mlx_data *data)
 {
 	if (key == 53)
 	{
-		mlx_destroy_window(data.mlx, data.win);
-		// exit(0);
+		mlx_destroy_image(data->mlx, data->img);
+		mlx_destroy_window(data->mlx, data->win);
+		exit(0);
 	}
 	return (0);
 }
@@ -87,7 +87,6 @@ int main(int c, char **args)
 		exit (1);
 	}
 	intiate_window(&my_mlx);
-	
 	t_points **points = get_coords(my_mlx, lines);
 	init_draw(my_mlx, points);
 	mlx_put_image_to_window(my_mlx.mlx, my_mlx.win, my_mlx.img, 0, 0);
