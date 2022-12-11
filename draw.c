@@ -63,7 +63,7 @@ void	custome_pixel_put(t_mlx_data *data, int x, int y, int color)
 // 	}
 // }
 
-static void	bresenham_algo(t_mlx_data my_mlx, int x1, int y1, int x2, int y2, int *po, int d)
+static void	bresenham_algo(t_mlx_data my_mlx, int *po, int color, int d)
 {
 	int pk = 2 * po[5] - po[4];
 	int	i;
@@ -71,22 +71,22 @@ static void	bresenham_algo(t_mlx_data my_mlx, int x1, int y1, int x2, int y2, in
 	i = -1;
 	while (++i <= po[4])
 	{
-		x1 < x2 ? x1++ : x1--;
+		po[0] < po[2] ? po[0]++ : po[0]--;
 		if (pk < 0)
 		{
 			if (d == 0)
-				custome_pixel_put(&my_mlx, x1, y1, 0xfcba03);
+				custome_pixel_put(&my_mlx, po[0], po[1], color);
 			else
-				custome_pixel_put(&my_mlx, y1, x1, 0xfcba03);
+				custome_pixel_put(&my_mlx, po[1], po[0], color);
 			pk = pk + 2 * po[5];
 		}
 		else
 		{
-			y1 < y2 ? y1++ : y1--;
+			po[1] < po[3] ? po[1]++ : po[1]--;
 			if (d == 0)
-				custome_pixel_put(&my_mlx, x1, y1, 0xfcba03);
+				custome_pixel_put(&my_mlx, po[0], po[1], color);
 			else
-				custome_pixel_put(&my_mlx, y1, x1, 0xfcba03);
+				custome_pixel_put(&my_mlx, po[1], po[0], color);
 			pk = pk + 2 * po[5] - 2 * po[4];
 		}
 	}
@@ -94,7 +94,7 @@ static void	bresenham_algo(t_mlx_data my_mlx, int x1, int y1, int x2, int y2, in
 
 void	draw_from_p2p(t_mlx_data my_mlx, int *fp, int *sp, int color)
 {
-	int infos[6];
+	int infos[7];
 
 	infos[0] = fp[0];//x1
 	infos[1] = fp[1];//y1
@@ -102,26 +102,27 @@ void	draw_from_p2p(t_mlx_data my_mlx, int *fp, int *sp, int color)
 	infos[3] = sp[1];//y2
 	infos[4] = abs(sp[0] - fp[0]);
 	infos[5] = abs(sp[1] - fp[1]);
+	infos[6] = sp[2];
 	if (infos[4] > infos[5])
 	{
-		bresenham_algo(my_mlx, fp[0], fp[1], sp[0], sp[1], infos, 0);
+		bresenham_algo(my_mlx, infos, color, 0);
 		return ;
 	}
+	infos[0] = fp[1];//x1
+	infos[1] = fp[0];//y1
+	infos[2] = sp[1];//x2d
+	infos[3] = sp[0];//y2
 	infos[4] = abs(sp[1] - fp[1]);
 	infos[5] = abs(sp[0] - fp[0]);
-	bresenham_algo(my_mlx, fp[1], fp[0], sp[1], sp[0], infos, 1);
+	bresenham_algo(my_mlx, infos, color, 1);
 }
 
 static void	init_and_draw(t_mlx_data my_mlx, int arr[4][3])
 {
-	// iso (&arr[0][0], &arr[0][1], arr[0][2], 0.5);
-	// iso (&arr[1][0], &arr[1][1], arr[1][2], 0.5);
-	// iso (&arr[2][0], &arr[2][1], arr[2][2], 0.5);
-	// iso (&arr[3][0], &arr[3][1], arr[3][2], 0.5);
-	draw_from_p2p(my_mlx, arr[0], arr[1], 0xf5bf42);
-	draw_from_p2p(my_mlx, arr[1], arr[2], 0xf5bf42);
-	draw_from_p2p(my_mlx, arr[3], arr[2], 0xf5bf42);
-	draw_from_p2p(my_mlx, arr[0], arr[3], 0xf5bf42);
+	draw_from_p2p(my_mlx, arr[0], arr[1], arr[1][2]);
+	draw_from_p2p(my_mlx, arr[1], arr[2], arr[2][2]);
+	draw_from_p2p(my_mlx, arr[3], arr[2], arr[2][2]);
+	draw_from_p2p(my_mlx, arr[0], arr[3], arr[3][2]);
 }
 
 void	init_draw(t_mlx_data my_mlx, t_points **points)
