@@ -35,6 +35,7 @@ void	add_node(t_points **head, int x, int y, char *num)
 	int	z;
 	
 	z = ft_atoi(ft_split(num, ',')[0]) * 10;
+	iso (&x, &y, z, 0.5);
 	if (ft_split(num, ',')[1])
 		color = ft_atoi(ft_split(num, ',')[1]);
 	else
@@ -76,7 +77,7 @@ t_points	**get_coords(t_mlx_data mlx_data, char **lines)
 	char		**line;
 	int			i;
 	int			j;
-
+	int			coords_with_iso[2];
 	points = ft_calloc(mlx_data.y_count + 1, sizeof(t_points *));
 	i = -1;
 	while (++i < mlx_data.y_count)
@@ -87,8 +88,6 @@ t_points	**get_coords(t_mlx_data mlx_data, char **lines)
 		while (line[++j])
 			add_node(&points[i], ((mlx_data.img_w - 100) / mlx_data.x_count) * j + 300,
 				((mlx_data.img_h - 100) / mlx_data.y_count) * i, line[j]);
-			// add_node(&points[i], ((mlx_data.img_w - 100) / mlx_data.x_count) * j + 300,
-			// 	((mlx_data.img_h - 100) / mlx_data.y_count) * i, ft_atoi(line[j]) * 3);
 		free (line);
 	}
 	link_to_down_nodes(points);

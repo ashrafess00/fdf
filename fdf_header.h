@@ -51,6 +51,5 @@ int			get_lines_counts(char **line);
 char		**read_file(t_mlx_data *mlx_data, int fd);
 void		draw_line(t_mlx_data my_mlx, int x1, int y1, int x2, int y2, int color);
 void		iso(int *x, int *y, int z, double degree);
-void		iso_linked(t_points * tmp);
-void		int_draw(t_mlx_data my_mlx, t_points **points);
+void		init_draw(t_mlx_data my_mlx, t_points **points);
 #endif

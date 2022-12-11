@@ -10,6 +10,6 @@ $(CC)=gcc
 
 # all:$(NAME)
 all:
-	$(CC) main.c read_file.c draw.c coords.c print_nodes.c ./libft/*.c -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && ./$(NAME) ./test_maps/pylone.fdf
-test:
-	$(CC) test.c -o test && ./test
+	$(CC) main.c read_file.c draw.c coords.c print_nodes.c ./libft/*.c -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && ./$(NAME) ./test_maps/elem-col.fdf
+test: test.o
+	$(CC) test.c -Lmlx -lmlx -framework OpenGL -framework AppKit -o test && ./test

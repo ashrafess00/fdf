@@ -63,7 +63,7 @@ static void	bresenham_algo(t_mlx_data my_mlx, int x1, int y1, int x2, int y2, in
 	}
 }
 
-void		draw_from_p2p(t_mlx_data my_mlx, int *fp, int *sp, int color)
+void	draw_from_p2p(t_mlx_data my_mlx, int *fp, int *sp, int color)
 {
 	int	i;
 	int	coordinates[5];
@@ -80,12 +80,12 @@ void		draw_from_p2p(t_mlx_data my_mlx, int *fp, int *sp, int color)
 		bresenham_algo(my_mlx, fp[1], fp[0], sp[1], sp[0], dy, dx, 1);
 }
 
-void	fo(t_mlx_data my_mlx, int arr[4][3])
+static void	init_and_draw(t_mlx_data my_mlx, int arr[4][3])
 {
-	iso (&arr[0][0], &arr[0][1], arr[0][2], 0.5);
-	iso (&arr[1][0], &arr[1][1], arr[1][2], 0.5);
-	iso (&arr[2][0], &arr[2][1], arr[2][2], 0.5);
-	iso (&arr[3][0], &arr[3][1], arr[3][2], 0.5);
+	// iso (&arr[0][0], &arr[0][1], arr[0][2], 0.5);
+	// iso (&arr[1][0], &arr[1][1], arr[1][2], 0.5);
+	// iso (&arr[2][0], &arr[2][1], arr[2][2], 0.5);
+	// iso (&arr[3][0], &arr[3][1], arr[3][2], 0.5);
 	draw_from_p2p(my_mlx, arr[0], arr[1], 0xf5bf42);
 	draw_from_p2p(my_mlx, arr[1], arr[2], 0xf5bf42);
 	draw_from_p2p(my_mlx, arr[3], arr[2], 0xf5bf42);
@@ -102,19 +102,35 @@ void	init_draw(t_mlx_data my_mlx, t_points **points)
 	{
 		while (points[i] && points[i]->next && points[i]->next->bottom)
 		{
+			// arr[0][0] = points[i]->x;
+			// arr[0][1] = points[i]->y;
+			// arr[0][2] = points[i]->z;
+			// arr[1][0] = points[i]->next->x;
+			// arr[1][1] = points[i]->next->y;
+			// arr[1][2] = points[i]->next->z;
+			// arr[2][0] = points[i]->next->bottom->x;
+			// arr[2][1] = points[i]->next->bottom->y;
+			// arr[2][2] = points[i]->next->bottom->z;
+			// arr[3][0] = points[i]->bottom->x;
+			// arr[3][1] = points[i]->bottom->y;
+			// arr[3][2] = points[i]->bottom->z;
+
 			arr[0][0] = points[i]->x;
 			arr[0][1] = points[i]->y;
-			arr[0][2] = points[i]->z;
+			arr[0][2] = points[i]->color;
+
 			arr[1][0] = points[i]->next->x;
 			arr[1][1] = points[i]->next->y;
-			arr[1][2] = points[i]->next->z;
+			arr[1][2] = points[i]->next->color;
+
 			arr[2][0] = points[i]->next->bottom->x;
 			arr[2][1] = points[i]->next->bottom->y;
-			arr[2][2] = points[i]->next->bottom->z;
+			arr[2][2] = points[i]->next->bottom->color;
+
 			arr[3][0] = points[i]->bottom->x;
 			arr[3][1] = points[i]->bottom->y;
-			arr[3][2] = points[i]->bottom->z;
-			fo (my_mlx, arr);
+			arr[3][2] = points[i]->bottom->color;
+			init_and_draw (my_mlx, arr);
 			points[i] = points[i]->next;
 		}
 	}	

@@ -63,6 +63,16 @@ void	intiate_window(t_mlx_data *my_mlx)
 	my_mlx->addr = mlx_get_data_addr(my_mlx->img, &my_mlx->bits_per_pixel, &my_mlx->line_length, &my_mlx->endian);
 }
 
+int	close_win(int key, t_mlx_data data)
+{
+	if (key == 53)
+	{
+		mlx_destroy_window(data.mlx, data.win);
+		// exit(0);
+	}
+	return (0);
+}
+
 int main(int c, char **args)
 {
 	int fd = open(args[1], O_RDONLY);
@@ -74,14 +84,14 @@ int main(int c, char **args)
 	if (!lines)
 	{
 		printf ("walla asa7bi");
-		exit (0);
+		exit (1);
 	}
 	intiate_window(&my_mlx);
 	
 	t_points **points = get_coords(my_mlx, lines);
-	i = -1;
 	init_draw(my_mlx, points);
 	mlx_put_image_to_window(my_mlx.mlx, my_mlx.win, my_mlx.img, 0, 0);
+	mlx_key_hook(my_mlx.win, &close_win, &my_mlx);
 	mlx_loop(my_mlx.mlx);
 	exit (0);
 	return (0);
