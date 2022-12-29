@@ -1,15 +1,44 @@
-# # $(CC)=gcc
-# # $(NAME)=fdfme
+NAME=fdf
+OBJS_DIR=objs/
+SRCS_DIR=srcs/
+SRCS_LIST=main.c coords.c draw.c init_window.c print_nodes.c read_file.c manage_nodes.c
+OBJS=$(addprefix $(OBJS_DIR), $(SRCS_LIST:.c=.o))
+LIBFT_DIR=libft/
+LIBFT=$(LIBFT_DIR)libft.a
 
-# SRC=main.c my_funcs/get_next_line/.*c
-# OBJS=$(SRC:.c=.o)
-NAME=fdfme
-$(CC)=gcc
-# # %.o:%.c
-# # 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+MLX_DIR=mlx/
+MLXLIB=$(MLX_DIR)libmlx.a
 
-# all:$(NAME)
-all:
-	$(CC) main.c read_file.c draw.c coords.c print_nodes.c ./libft/*.c -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && ./$(NAME) ./test_maps/42.fdf
-test: test.o
-	$(CC) test.c -Lmlx -lmlx -framework OpenGL -framework AppKit -o test && ./test
+CC=gcc
+# CFLAGS=-Wall -O3 -Wextra -Werror
+CFLAGS=
+INC=-I./headers/ -I./mlx/ -I./libft/
+
+RM=rm -rf
+all:$(OBJS_DIR) $(NAME) 
+
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIR) 
+
+$(NAME):$(OBJS) $(LIBFT)
+	$(CC) $(OBJS) $(LIBFT) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+# $(MLXLIB):
+# 	$(MAKE) -C $(MLX_DIR)
+
+$(OBJS_DIR)%.o:$(SRCS_DIR)%.c
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $^
+
+clean:
+	$(RM) objs
+	make clean -C $(LIBFT_DIR)
+
+fclean:clean
+	make fclean -C $(LIBFT_DIR)
+	$(RM) $(NAME)
+
+re:fclean all
