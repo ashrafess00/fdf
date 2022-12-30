@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:35:03 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/28 23:09:04 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/29 19:11:56 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**read_file(t_mlx_data *mlx_data, int fd)
 
 	line = get_next_line(fd);
 	if (!line)
-		return (0);
+		write_error("where is the map hhh");
 	mlx_data->x_count = count_xm(line);
 	mlx_data->y_count = 1;
 	string = ft_calloc(1, 1);
@@ -68,7 +68,7 @@ char	**read_file(t_mlx_data *mlx_data, int fd)
 			break ;
 		}
 		if (mlx_data->x_count != count_xm(line))
-			return (0);
+			write_error("the map is not formatted correctly");
 		string = ft_strjoin(string, line);
 		mlx_data->y_count++;
 	}

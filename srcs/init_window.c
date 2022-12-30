@@ -6,13 +6,13 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:21:55 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/28 23:26:23 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/29 13:35:17 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_header.h"
 
-static int	win_size(int a)
+int	win_size(int a)
 {
 	int	per;
 

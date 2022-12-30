@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:54:26 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/28 23:28:25 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/30 18:07:20 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	link_to_down_nodes(t_points **points)
 	}
 }
 
-static int	percentage(int a)
+static int	percentage(int a, int s)
 {
-	return (a * 20 / 100);
+	return (a * s / 100);
 }
 
 static void	free_arr(char **arr)
@@ -48,7 +48,7 @@ static void	free_arr(char **arr)
 	free(arr);
 }
 
-t_points	**get_coords(t_mlx_data mlx_data, char **lines, char *z, char *s)
+t_points	**get_coords(t_mlx_data *mlx_data, char **lines, char *z, char *s)
 {
 	t_points	**points;
 	char		**line;// 0 - 10 - 0 - 0 - 10
@@ -56,23 +56,23 @@ t_points	**get_coords(t_mlx_data mlx_data, char **lines, char *z, char *s)
 	int			j;
 	int			x_y[2];
 	
-	points = ft_calloc(mlx_data.y_count + 1, sizeof(t_points *));
+	points = ft_calloc(mlx_data->y_count + 1, sizeof(t_points *));
 	i = -1;
-	while (++i < mlx_data.y_count)
+	while (++i < mlx_data->y_count)
 	{
 		j = -1;
-		line = ft_split(lines[i], ' ');
+		line = ft_split(ft_strdup(lines[i]), ' ');
 		points[i] = NULL;
 		while (line[++j])
 		{
-			x_y[0] = (((mlx_data.img_w - percentage(mlx_data.img_w)) / mlx_data.x_count) * j)
-			+ percentage(mlx_data.img_w) * 2;
-			x_y[1] = (mlx_data.img_h - percentage(mlx_data.img_h)) / mlx_data.y_count * i;
+			x_y[0] = (((mlx_data->img_w - percentage(mlx_data->img_w, 1)) / mlx_data->x_count) * j)
+			+ percentage(mlx_data->img_w, 20) * 2;
+			x_y[1] = (mlx_data->img_h - percentage(mlx_data->img_h, 1)) / mlx_data->y_count * i;
 			add_node(&points[i], x_y, line[j], z);
 		}
 		free(line);
 	}
-	free(lines);
+	// free(lines);
 	link_to_down_nodes(points);
 	return (points);
 }
