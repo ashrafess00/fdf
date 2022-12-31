@@ -10,8 +10,8 @@ MLX_DIR=mlx/
 MLXLIB=$(MLX_DIR)libmlx.a
 
 CC=gcc
-# CFLAGS=-Wall -O3 -Wextra -Werror
-CFLAGS=
+CFLAGS=-Wall -O3 -Wextra -Werror
+# CFLAGS=
 INC=-I./headers/ -I./mlx/ -I./libft/
 
 RM=rm -rf
@@ -31,7 +31,7 @@ $(LIBFT):
 # 	$(MAKE) -C $(MLX_DIR)
 
 $(OBJS_DIR)%.o:$(SRCS_DIR)%.c
-	$(CC) $(CFLAGS) $(INC) -c -o $@ $^
+	$(CC) $(INC) -c -o $@ $^
 
 clean:
 	$(RM) objs

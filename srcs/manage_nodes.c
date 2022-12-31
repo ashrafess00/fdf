@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:00:42 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/30 15:16:33 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/31 21:42:09 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	free_arr(char **arr)
 	free(arr);
 }
 
-void	add_node(t_points **head, int x_y[2], char *num, char *h)
+void	add_node(t_points **head, int x_y[2], char *num, int h)
 {
 	t_points	*temp;
 	int			color;
@@ -76,7 +76,7 @@ void	add_node(t_points **head, int x_y[2], char *num, char *h)
 	char		**num_splitted;
 
 	num_splitted = ft_split(ft_strdup(num), ',');
-	z = ft_atoi(num_splitted[0]) * ft_atoi(h);
+	z = ft_atoi(num_splitted[0]) * h;
 	iso (&x_y[0], &x_y[1], z, 0.5);
 	if (ft_strchr(num, ','))
 		color = hex_to_color(ft_strchr(num, ','));
