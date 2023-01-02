@@ -1,7 +1,7 @@
 NAME=fdf
 OBJS_DIR=objs/
 SRCS_DIR=srcs/
-SRCS_LIST=main.c coords.c draw.c init_window.c print_nodes.c read_file.c manage_nodes.c bresenham_algo.c errors.c draw_me.c hook_me.c
+SRCS_LIST=main.c coords.c draw.c init_window.c read_file.c manage_nodes.c bresenham_algo.c errors.c draw_me.c hook_me.c iso.c
 OBJS=$(addprefix $(OBJS_DIR), $(SRCS_LIST:.c=.o))
 LIBFT_DIR=libft/
 LIBFT=$(LIBFT_DIR)libft.a

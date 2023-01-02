@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:22:45 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/30 17:45:46 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/31 21:59:35 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_draw(t_mlx_data *my_mlx, t_points **points)
 	int			arr[4][3];
 	t_points	*current;
 	t_points	*current2;
-	
+
 	i = -1;
 	while (points[++i])
 	{

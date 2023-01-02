@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:54:26 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/31 21:50:19 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/02 20:40:38 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ void	link_to_down_nodes(t_points **points)
 	}
 }
 
-static int	percentage(int a, int s)
-{
-	return (a * s / 100);
-}
-
 static void	free_arr(char **arr)
 {
 	int	i;
@@ -48,27 +43,28 @@ static void	free_arr(char **arr)
 	free(arr);
 }
 
-t_points	**get_coords(t_mlx_data *mlx_data, char **lines, int z, int s)
+t_points	**get_coords(t_mlx_data *mlx_data, int z, int s, float d)
 {
 	t_points	**points;
-	char		**line;// 0 - 10 - 0 - 0 - 10
+	char		**line;
 	int			i;
 	int			j;
-	int			x_y[2];
-	
+	int			x_y_z[3];
+
+	x_y_z[2] = z;
 	points = ft_calloc(mlx_data->y_count + 1, sizeof(t_points *));
 	i = -1;
 	while (++i < mlx_data->y_count)
 	{
 		j = -1;
-		line = ft_split(ft_strdup(lines[i]), ' ');
+		line = ft_split(ft_strdup(mlx_data->lines[i]), ' ');
 		points[i] = NULL;
 		while (line[++j])
 		{
-			x_y[0] = ((((mlx_data->img_w + 50 * s) / mlx_data->x_count) * j)
-			+ mlx_data->img_w / 2) ;
-			x_y[1] = ((mlx_data->img_h + 50 * s) / mlx_data->y_count * i) ;
-			add_node(&points[i], x_y, line[j], z);
+			x_y_z[0] = (((mlx_data->img_w + 10 * s) / mlx_data->x_count) * j
+					+ mlx_data->img_w / 2);
+			x_y_z[1] = ((mlx_data->img_h + 10 * s) / mlx_data->y_count * i);
+			add_node(&points[i], line[j], x_y_z, d);
 		}
 		free(line);
 	}

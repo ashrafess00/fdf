@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_nodes.c                                      :+:      :+:    :+:   */
+/*   iso.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 23:10:57 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/28 23:11:46 by aessaoud         ###   ########.fr       */
+/*   Created: 2023/01/02 16:10:23 by aessaoud          #+#    #+#             */
+/*   Updated: 2023/01/02 20:31:36 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_header.h"
 
-void	print_node(t_points **points)
+void	iso(int *x, int *y, int z, double degree)
 {
-	// int			i;
-	// t_points	*tmp;
+	int	p_x;
+	int	p_y;
 
-	// i = -1;
-	// while (points[++i])
-	// {
-	// 	tmp = points[i];
-	// 	while (tmp != NULL)
-	// 	{
-	// 		ft_printf("(x: %d, y: %d, z: %d | add : %p| next : %p | bottom : %p) -> ",
-	// 		tmp->x, tmp->y, tmp->z, tmp, tmp->next, tmp->bottom);
-	// 		tmp = tmp->next;
-	// 	}
-	// 	ft_printf("\n");
-	// }
+	p_x = *x;
+	p_y = *y;
+	*x = (p_x - p_y) * cos(degree);
+	*y = -z + (p_x + p_y) * sin(degree);
 }

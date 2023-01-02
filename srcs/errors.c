@@ -6,13 +6,13 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:36:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/30 21:31:32 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/31 21:59:59 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_header.h"
 
-void    write_error(char *s)
+void	write_error(char *s)
 {
 	write(2, s, ft_strlen(s));
 	exit(0);

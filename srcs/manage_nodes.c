@@ -6,25 +6,13 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:00:42 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/31 21:42:09 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/02 20:41:33 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_header.h"
 
-//isometric projection
-void	iso(int *x, int *y, int z, double degree)
-{
-	int	p_x;
-	int	p_y;
-
-	p_x = *x;
-	p_y = *y;
-	*x = (p_x - p_y) * cos(degree);
-	*y = -z + (p_x + p_y) * sin(degree);
-}
-
-int	hex_to_color(char *hex)
+static int	hex_to_color(char *hex)
 {
 	int	i;
 	int	r;
@@ -43,7 +31,7 @@ int	hex_to_color(char *hex)
 	return (r);
 }
 
-t_points	*create_node(int x, int y, int z, int color)
+static t_points	*create_node(int x, int y, int z, int color)
 {
 	t_points	*new_node;
 
@@ -68,28 +56,30 @@ static void	free_arr(char **arr)
 	free(arr);
 }
 
-void	add_node(t_points **head, int x_y[2], char *num, int h)
+void	add_node(t_points **head, char *num, int x_y_z[4], float d)
 {
 	t_points	*temp;
 	int			color;
-	int			z;	
+	int			splitted_z;	
 	char		**num_splitted;
 
 	num_splitted = ft_split(ft_strdup(num), ',');
-	z = ft_atoi(num_splitted[0]) * h;
-	iso (&x_y[0], &x_y[1], z, 0.5);
+	splitted_z = ft_atoi(num_splitted[0]) * x_y_z[2];
+	iso (&x_y_z[0], &x_y_z[1], splitted_z, d);
 	if (ft_strchr(num, ','))
 		color = hex_to_color(ft_strchr(num, ','));
+	else if (ft_strcmp(num, "0"))
+		color = 0xfcba03;
 	else
 		color = 0xffffff;
 	if (*head == NULL)
-		*head = create_node(x_y[0], x_y[1], z, color);
+		*head = create_node(x_y_z[0], x_y_z[1], splitted_z, color);
 	else
 	{
 		temp = *head;
 		while (temp->next != NULL)
 			temp = temp->next;
-		temp->next = create_node(x_y[0], x_y[1], z, color);
+		temp->next = create_node(x_y_z[0], x_y_z[1], splitted_z, color);
 	}
 	free_arr(num_splitted);
 	free(num);
