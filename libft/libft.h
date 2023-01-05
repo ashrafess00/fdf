@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:48:42 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/02 20:46:23 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 00:21:29 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,4 @@ int		ft_putnbr(long int num, char *base);
 int		ft_putnbru(unsigned long int num, char *base);
 int		ft_putstr(char *str);
 int		ft_max(int a, int b);
-
 #endif

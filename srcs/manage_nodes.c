@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:00:42 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/05 20:16:01 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/05 23:35:42 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	add_node(t_points **head, char *num, int x_y_z[4], float d)
 	splitted_z = ft_atoi(num_splitted[0]) * x_y_z[2];
 	iso (&x_y_z[0], &x_y_z[1], splitted_z, d);
 	if (ft_strchr(num, ','))
-		hex_to_rgb(color_rgb, ft_strchr(num, ',')+1, WITH_COLOR);
+		hex_to_rgb(color_rgb, ft_strchr(num, ',') + 1, WITH_COLOR);
 	else
 		hex_to_rgb(color_rgb, NULL, WITH_WHITE);
 	if (*head == NULL)

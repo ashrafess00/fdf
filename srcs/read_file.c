@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:35:03 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/29 19:11:56 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 00:14:16 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,6 @@ int	count_xm(char *s)
 			i++;
 	}
 	return (count);
-}
-
-static void	free_arr(char **arr)
-{
-	int	i;
-
-	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
 }
 
 static void	set_win_w_h(t_mlx_data *mlx_data)

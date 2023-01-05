@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:01:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/05 21:21:11 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 00:14:32 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,55 +39,44 @@ static int	hex_to_decimal(char *hex)
 
 void	hex_to_rgb(int color_rgb[3], char *hex, int white)
 {
+	int	decimal;
+
 	if (white == 1)
 	{
-		color_rgb[0] = hex_to_decimal("ff");
-		color_rgb[1] = hex_to_decimal("ff");
-		color_rgb[2] = hex_to_decimal("ff");
+		color_rgb[0] = 255;
+		color_rgb[1] = 255;
+		color_rgb[2] = 255;
 	}
 	else
 	{
-		color_rgb[0] = hex_to_decimal(ft_substr(hex, 2, 2));
-		color_rgb[1] = hex_to_decimal(ft_substr(hex, 4, 2));
-		color_rgb[2] = hex_to_decimal(ft_substr(hex, 6, 2));
+		decimal = hex_to_decimal(hex);
+		color_rgb[0] = ((decimal >> 16) & 0xFF);
+		color_rgb[1] = ((decimal >> 8) & 0xFF);
+		color_rgb[2] = (decimal & 0xFF);
 	}
+}
+
+static int	get_r_g_b(int color1, int color2, int dis, int i)
+{
+	float	range;
+	float	fac;
+
+	range = abs(color2 - color1);
+	fac = range / dis;
+	if (color1 <= color2)
+		return ((int)(color1 + (i * fac)));
+	else
+		return ((int)(color1 - (i * fac)));
 }
 
 int	get_color(int *rgb1, int *rgb2, int dis, int i)
 {
-	int r;
-	int g;
-	int b;
-	float	range;
-	int	r1;
-	int	r2;
-	int distance;
-	float	fac;
-	
-	distance = dis;
-	r1 = rgb1[0];
-	r2 = rgb2[0];
-	range = abs(r2 - r1);
-	fac = range / distance;
-	if (r1 <= r2)
-		r = (int)(r1 + (i * fac));
-	else
-		r = (int)(r1 - (i * fac));
-	r1 = rgb1[1];
-	r2 = rgb2[1];
-	range = abs(r2 - r1);
-	fac = range / distance;
-	if (r1 <= r2)
-		g = (int)(r1 + (i * fac));
-	else
-		g = (int)(r1 - (i * fac));
-	r1 = rgb1[2];
-	r2 = rgb2[2];
-	range = abs(r2 - r1);
-	fac = range / distance;
-	if (r1 <= r2)
-		b = (int)(r1 + (i * fac));
-	else
-		b = (int)(r1 - (i * fac));
+	int	r;
+	int	g;
+	int	b;
+
+	r = get_r_g_b(rgb1[0], rgb2[0], dis, i);
+	g = get_r_g_b(rgb1[1], rgb2[1], dis, i);
+	b = get_r_g_b(rgb1[2], rgb2[2], dis, i);
 	return (rgb_to_decimal(r, g, b));
 }

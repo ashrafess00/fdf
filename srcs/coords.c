@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:54:26 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/02 20:40:38 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 00:14:05 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,6 @@ void	link_to_down_nodes(t_points **points)
 			tmp2 = tmp2->next;
 		}
 	}
-}
-
-static void	free_arr(char **arr)
-{
-	int	i;
-
-	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
 }
 
 t_points	**get_coords(t_mlx_data *mlx_data, int z, int s, float d)

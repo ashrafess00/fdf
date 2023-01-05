@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:25:17 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/05 21:23:39 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 00:06:58 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@ static void	set_dir(int *po1, int po2)
 		(*po1)--;
 }
 
-static void	bresenham_algo_d_0(t_mlx_data *my_mlx, int *po, int *rgb1, int *rgb2, int d)
+static void	bresenham_algo_d_0(t_mlx_data *mlx, int *po, int *rgb1, int *rgb2)
 {
 	int	pk;
 	int	i;
 	int	color;
 
-	color = rgb_to_decimal(255, 0, 0);
 	pk = 2 * po[5] - po[4];
 	i = -1;
 	while (++i <= po[4])
@@ -45,26 +44,24 @@ static void	bresenham_algo_d_0(t_mlx_data *my_mlx, int *po, int *rgb1, int *rgb2
 		set_dir(&po[0], po[2]);
 		if (pk < 0)
 		{
-			draw_on_img(my_mlx, po[0], po[1], color);
+			draw_on_img(mlx, po[0], po[1], color);
 			pk = pk + 2 * po[5];
 		}
 		else
 		{
 			set_dir(&po[1], po[3]);
-			draw_on_img(my_mlx, po[0], po[1], color);
+			draw_on_img(mlx, po[0], po[1], color);
 			pk = pk + 2 * po[5] - 2 * po[4];
 		}
 	}
 }
 
-
-static void	bresenham_algo_d_1(t_mlx_data *my_mlx, int *po, int *rgb1, int *rgb2, int d)
+static void	bresenham_algo_d_1(t_mlx_data *mlx, int *po, int *rgb1, int *rgb2)
 {
 	int	pk;
 	int	i;
 	int	color;
- 
-	color = 0xffffff;
+
 	pk = 2 * po[5] - po[4];
 	i = -1;
 	while (++i <= po[4])
@@ -73,44 +70,29 @@ static void	bresenham_algo_d_1(t_mlx_data *my_mlx, int *po, int *rgb1, int *rgb2
 		set_dir(&po[0], po[2]);
 		if (pk < 0)
 		{
-			draw_on_img(my_mlx, po[1], po[0], color);
+			draw_on_img(mlx, po[1], po[0], color);
 			pk = pk + 2 * po[5];
 		}
 		else
 		{
 			set_dir(&po[1], po[3]);
-			draw_on_img(my_mlx, po[1], po[0], color);
+			draw_on_img(mlx, po[1], po[0], color);
 			pk = pk + 2 * po[5] - 2 * po[4];
 		}
 	}
 }
 
-/*
-indexes:
-	0 -> x1
-	1 -> y1
-	2 -> x2
-	3 -> y2
-	4 -> dx
-	5 -> dy
-	6 -> color
-*/
-void	draw_from_p2p(t_mlx_data *my_mlx, int *fp, int *sp, int *rgb1, int *rgb2)
+void	draw_from_p2p(t_mlx_data *my_mlx, int *fp, int *sp)
 {
 	int	infos[7];
+	int	rgb1[3];
+	int	rgb2[3];
 
-	infos[0] = fp[0];
-	infos[1] = fp[1];
-	infos[2] = sp[0];
-	infos[3] = sp[1];
-	infos[4] = abs(sp[0] - fp[0]);
-	infos[5] = abs(sp[1] - fp[1]);
-	infos[6] = sp[2];
-	// ft_printf("%d - ^^ - %d - ^^ %d\n", rgb1[0], rgb1[1], rgb1[2]);
-	// ft_printf("%d - ^^ - %d - ^^ %d\n", rgb2[0], rgb2[1], rgb2[2]);
+	fill_info_arr(infos, fp, sp);
+	fill_color_arr(rgb1, rgb2, fp, sp);
 	if (infos[4] > infos[5])
 	{
-		bresenham_algo_d_0(my_mlx, infos, rgb1, rgb2, 0);
+		bresenham_algo_d_0(my_mlx, infos, rgb1, rgb2);
 		return ;
 	}
 	infos[0] = fp[1];
@@ -119,5 +101,5 @@ void	draw_from_p2p(t_mlx_data *my_mlx, int *fp, int *sp, int *rgb1, int *rgb2)
 	infos[3] = sp[0];
 	infos[4] = abs(sp[1] - fp[1]);
 	infos[5] = abs(sp[0] - fp[0]);
-	bresenham_algo_d_1(my_mlx, infos, rgb1, rgb2, 1);
+	bresenham_algo_d_1(my_mlx, infos, rgb1, rgb2);
 }

@@ -1,7 +1,7 @@
 NAME=fdf
 OBJS_DIR=objs/
 SRCS_DIR=srcs/
-SRCS_LIST=main.c coords.c draw.c init_window.c read_file.c manage_nodes.c bresenham_algo.c errors.c draw_me.c hook_me.c iso.c colors.c
+SRCS_LIST=main.c coords.c draw.c init_window.c read_file.c manage_nodes.c bresenham_algo.c errors.c draw_me.c hook_me.c iso.c colors.c fill_arrs.c
 OBJS=$(addprefix $(OBJS_DIR), $(SRCS_LIST:.c=.o))
 LIBFT_DIR=libft/
 LIBFT=$(LIBFT_DIR)libft.a
@@ -11,7 +11,6 @@ MLXLIB=$(MLX_DIR)libmlx.a
 
 CC=gcc
 CFLAGS=-Wall -O3 -Wextra -Werror
-# CFLAGS=
 INC=-I./headers/ -I./mlx/ -I./libft/
 
 RM=rm -rf
@@ -21,7 +20,7 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR) 
 
 $(NAME):$(OBJS) $(LIBFT)
-	$(CC) $(OBJS) $(LIBFT) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 
 $(LIBFT):
@@ -31,7 +30,7 @@ $(LIBFT):
 # 	$(MAKE) -C $(MLX_DIR)
 
 $(OBJS_DIR)%.o:$(SRCS_DIR)%.c
-	$(CC) $(INC) -c -o $@ $^
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $^
 
 clean:
 	$(RM) objs
