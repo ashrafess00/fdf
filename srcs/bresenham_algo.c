@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:25:17 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/30 13:28:10 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/05 21:23:39 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,18 @@ static void	set_dir(int *po1, int po2)
 		(*po1)--;
 }
 
-static void	bresenham_algo_d_0(t_mlx_data *my_mlx, int *po, int color, int d)
+static void	bresenham_algo_d_0(t_mlx_data *my_mlx, int *po, int *rgb1, int *rgb2, int d)
 {
 	int	pk;
 	int	i;
+	int	color;
 
+	color = rgb_to_decimal(255, 0, 0);
 	pk = 2 * po[5] - po[4];
 	i = -1;
 	while (++i <= po[4])
 	{
+		color = get_color(rgb1, rgb2, po[4], i);
 		set_dir(&po[0], po[2]);
 		if (pk < 0)
 		{
@@ -54,15 +57,19 @@ static void	bresenham_algo_d_0(t_mlx_data *my_mlx, int *po, int color, int d)
 	}
 }
 
-static void	bresenham_algo_d_1(t_mlx_data *my_mlx, int *po, int color, int d)
+
+static void	bresenham_algo_d_1(t_mlx_data *my_mlx, int *po, int *rgb1, int *rgb2, int d)
 {
 	int	pk;
 	int	i;
-
+	int	color;
+ 
+	color = 0xffffff;
 	pk = 2 * po[5] - po[4];
 	i = -1;
 	while (++i <= po[4])
 	{
+		color = get_color(rgb1, rgb2, po[4], i);
 		set_dir(&po[0], po[2]);
 		if (pk < 0)
 		{
@@ -88,7 +95,7 @@ indexes:
 	5 -> dy
 	6 -> color
 */
-void	draw_from_p2p(t_mlx_data *my_mlx, int *fp, int *sp, int color)
+void	draw_from_p2p(t_mlx_data *my_mlx, int *fp, int *sp, int *rgb1, int *rgb2)
 {
 	int	infos[7];
 
@@ -99,9 +106,11 @@ void	draw_from_p2p(t_mlx_data *my_mlx, int *fp, int *sp, int color)
 	infos[4] = abs(sp[0] - fp[0]);
 	infos[5] = abs(sp[1] - fp[1]);
 	infos[6] = sp[2];
+	// ft_printf("%d - ^^ - %d - ^^ %d\n", rgb1[0], rgb1[1], rgb1[2]);
+	// ft_printf("%d - ^^ - %d - ^^ %d\n", rgb2[0], rgb2[1], rgb2[2]);
 	if (infos[4] > infos[5])
 	{
-		bresenham_algo_d_0(my_mlx, infos, color, 0);
+		bresenham_algo_d_0(my_mlx, infos, rgb1, rgb2, 0);
 		return ;
 	}
 	infos[0] = fp[1];
@@ -110,5 +119,5 @@ void	draw_from_p2p(t_mlx_data *my_mlx, int *fp, int *sp, int color)
 	infos[3] = sp[0];
 	infos[4] = abs(sp[1] - fp[1]);
 	infos[5] = abs(sp[0] - fp[0]);
-	bresenham_algo_d_1(my_mlx, infos, color, 1);
+	bresenham_algo_d_1(my_mlx, infos, rgb1, rgb2, 1);
 }
