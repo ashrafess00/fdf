@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 12:57:14 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 00:22:13 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:25:35 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define DEFAULT_D 0.5
 # define WITH_COLOR 0
 # define WITH_WHITE 1
+# define DEFAULT_I 1
 
 typedef struct s_points
 {
@@ -51,18 +52,18 @@ typedef struct s_mlx_data
 	char		**lines;
 }	t_mlx_data;
 
-t_points	**get_coords(t_mlx_data *mlx_data, int z, int s, float d);
+t_points	**get_coords(t_mlx_data *mlx_data, int z_s_i[3], float d);
 void		add_node(t_points **head, char *num, int x_y_z[4], float d);
 char		**read_file(t_mlx_data *mlx_data, int fd);
-void		iso(int *x, int *y, int z, double degree);
 void		init_draw(t_mlx_data *my_mlx, t_points **points);
 void		intiate_window(t_mlx_data *my_mlx);
 void		draw_from_p2p(t_mlx_data *my_mlx, int *fp, int *sp);
 int			win_size(int a);
 void		write_error(char *s);
-void		draw_me(t_mlx_data *my_mlx, int z, int s, float d);
+void		draw_me(t_mlx_data *my_mlx, int z_s_i[3], float d);
 int			move(int key, t_mlx_data *my_mlx);
-void		iso(int *x, int *y, int z, double degree);
+void		iso1(int *x, int *y, int z, double degree);
+void		iso2(int *x, int *y, int z);
 int			close_win(t_mlx_data *my_mlx);
 void		hex_to_rgb(int color_rgb[3], char *hex, int white);
 int			rgb_to_decimal( int r, int g, int b);

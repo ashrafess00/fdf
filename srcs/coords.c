@@ -6,11 +6,10 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:54:26 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 00:14:05 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:21:50 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "./mlx/mlx.h"
 #include "fdf_header.h"
 
 void	link_to_down_nodes(t_points **points)
@@ -33,28 +32,28 @@ void	link_to_down_nodes(t_points **points)
 	}
 }
 
-t_points	**get_coords(t_mlx_data *mlx_data, int z, int s, float d)
+t_points	**get_coords(t_mlx_data *mlx_d, int z_s_i[3], float d)
 {
 	t_points	**points;
 	char		**line;
 	int			i;
 	int			j;
-	int			x_y_z[3];
+	int			x_y_z_i[4];
 
-	x_y_z[2] = z;
-	points = ft_calloc(mlx_data->y_count + 1, sizeof(t_points *));
+	x_y_z_i[2] = z_s_i[0];
+	x_y_z_i[3] = z_s_i[2];
+	points = ft_calloc(mlx_d->y_count + 1, sizeof(t_points *));
 	i = -1;
-	while (++i < mlx_data->y_count)
+	while (++i < mlx_d->y_count)
 	{
 		j = -1;
-		line = ft_split(ft_strdup(mlx_data->lines[i]), ' ');
-		points[i] = NULL;
+		line = ft_split(ft_strdup(mlx_d->lines[i]), ' ');
 		while (line[++j])
 		{
-			x_y_z[0] = (((mlx_data->img_w + 10 * s) / mlx_data->x_count) * j
-					+ mlx_data->img_w / 2);
-			x_y_z[1] = ((mlx_data->img_h + 10 * s) / mlx_data->y_count * i);
-			add_node(&points[i], line[j], x_y_z, d);
+			x_y_z_i[0] = (((mlx_d->img_w + 10 * z_s_i[1])
+						/ mlx_d->x_count) * j + mlx_d->img_w / 2);
+			x_y_z_i[1] = ((mlx_d->img_h + 10 * z_s_i[1]) / mlx_d->y_count * i);
+			add_node(&points[i], line[j], x_y_z_i, d);
 		}
 		free(line);
 	}
