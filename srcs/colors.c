@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:01:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 22:36:56 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 23:37:58 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,17 @@ static int	hex_to_decimal(char *hex)
 	return (r);
 }
 
-void	hex_to_rgb(int color_rgb[3], char *hex, int white)
+int	hex_to_rgb(char *hex, int white)
 {
 	int	decimal;
 
 	if (white == 1)
-	{
-		color_rgb[0] = 255;
-		color_rgb[1] = 255;
-		color_rgb[2] = 255;
-	}
-	else
-	{
-		decimal = hex_to_decimal(hex);
-		color_rgb[0] = ((decimal >> 16) & 0xFF);
-		color_rgb[1] = ((decimal >> 8) & 0xFF);
-		color_rgb[2] = (decimal & 0xFF);
-	}
+		return (16777215);
+	decimal = hex_to_decimal(hex);
+	return (decimal);
 }
 
-static int	get_r_g_b(int color1, int color2, int dis, int i)
+static int	change_gradiant(int color1, int color2, int dis, int i)
 {
 	float	range;
 	float	fac;
@@ -64,14 +55,14 @@ static int	get_r_g_b(int color1, int color2, int dis, int i)
 		return ((int)(color1 - (i * fac)));
 }
 
-int	get_color(int *rgb1, int *rgb2, int dis, int i)
+int	get_color(int rgb1, int rgb2, int dis, int i)
 {
 	int	r;
 	int	g;
 	int	b;
 
-	r = get_r_g_b(rgb1[0], rgb2[0], dis, i);
-	g = get_r_g_b(rgb1[1], rgb2[1], dis, i);
-	b = get_r_g_b(rgb1[2], rgb2[2], dis, i);
+	r = change_gradiant((rgb1 >> 16) & 0xFF, (rgb2 >> 16) & 0xFF, dis, i);
+	g = change_gradiant((rgb1 >> 8) & 0xFF, (rgb2 >> 8) & 0xFF, dis, i);
+	b = change_gradiant(rgb1 & 0xFF, rgb2 & 0xFF, dis, i);
 	return (r << 16 | g << 8 | b);
 }

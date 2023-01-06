@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:00:42 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 22:38:42 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 23:34:24 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	free_arr(char **arr, char *num)
 	free(num);
 }
 
-static t_points_node	*create_node(int x, int y, int z, int color_rgb[3])
+static t_points_node	*create_node(int x, int y, int z, int color_rgb)
 {
 	t_points_node	*new_node;
 
@@ -34,9 +34,7 @@ static t_points_node	*create_node(int x, int y, int z, int color_rgb[3])
 	new_node->x = x;
 	new_node->y = y;
 	new_node->z = z;
-	new_node->color_rgb[0] = color_rgb[0];
-	new_node->color_rgb[1] = color_rgb[1];
-	new_node->color_rgb[2] = color_rgb[2];
+	new_node->color_rgb = color_rgb;
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -45,7 +43,7 @@ void	add_node(t_points_node **head, char *num, int x_y[2],
 t__z_s_i_d z_s_i_d)
 {
 	t_points_node	*temp;
-	int				color_rgb[3];
+	int				color_rgb;
 	int				splitted_z;	
 	char			**num_splitted;
 
@@ -56,9 +54,9 @@ t__z_s_i_d z_s_i_d)
 	else
 		iso2 (&x_y[0], &x_y[1], splitted_z);
 	if (ft_strchr(num, ','))
-		hex_to_rgb(color_rgb, ft_strchr(num, ',') + 1, WITH_COLOR);
+		color_rgb = hex_to_rgb(ft_strchr(num, ',') + 1, WITH_COLOR);
 	else
-		hex_to_rgb(color_rgb, NULL, WITH_WHITE);
+		color_rgb = hex_to_rgb(NULL, WITH_WHITE);
 	if (*head == NULL)
 		*head = create_node(x_y[0], x_y[1], splitted_z, color_rgb);
 	else

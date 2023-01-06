@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 12:57:14 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 22:47:06 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 23:34:33 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_points_node
 	int						color;
 	struct s_points_node	*next;
 	struct s_points_node	*bottom;
-	int						color_rgb[3];
+	int						color_rgb;
 }	t_points_node;
 
 typedef struct s_point__1_2
@@ -43,8 +43,8 @@ typedef struct s_point__1_2
 	int	y2;
 	int	dx;
 	int	dy;
-	int	rgb1[3];
-	int	rgb2[3];
+	int	rgb1;
+	int	rgb2;
 }	t_point__1_2;
 
 typedef struct s__z_s_i_d
@@ -87,8 +87,8 @@ int				move(int key, t_mlx_data *my_mlx);
 void			iso1(int *x, int *y, int z, double degree);
 void			iso2(int *x, int *y, int z);
 int				close_win(t_mlx_data *my_mlx);
-void			hex_to_rgb(int color_rgb[3], char *hex, int white);
-int				get_color(int *rgb1, int *rgb2, int dis, int i);
+int				hex_to_rgb(char *hex, int white);
+int				get_color(int rgb1, int rgb2, int dis, int i);
 void			fill_info_arr(int *infos, int *fp, int *sp);
 void			fill_color_arr(int *rgb1, int *rgb2, int *fp, int *sp);
 void			fill_points_arr(int *points_arr, t_points_node *points);

@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:22:45 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 22:39:55 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 23:25:08 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,10 @@ t_points_node *point2)
 {
 	point__1_2->x1 = point1->x;
 	point__1_2->y1 = point1->y;
-	point__1_2->rgb1[0] = point1->color_rgb[0];
-	point__1_2->rgb1[1] = point1->color_rgb[1];
-	point__1_2->rgb1[2] = point1->color_rgb[2];
+	point__1_2->rgb1 = point1->color_rgb;
 	point__1_2->x2 = point2->x;
 	point__1_2->y2 = point2->y;
-	point__1_2->rgb2[0] = point2->color_rgb[0];
-	point__1_2->rgb2[1] = point2->color_rgb[1];
-	point__1_2->rgb2[2] = point2->color_rgb[2];
+	point__1_2->rgb2 = point2->color_rgb;
 	point__1_2->dx = abs(point2->x - point1->x);
 	point__1_2->dy = abs(point2->y - point1->y);
 }
