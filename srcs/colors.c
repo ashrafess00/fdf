@@ -6,17 +6,12 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:01:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 00:14:32 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 22:36:56 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include <stdio.h>
-
-int	rgb_to_decimal( int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
 
 static int	hex_to_decimal(char *hex)
 {
@@ -78,5 +73,5 @@ int	get_color(int *rgb1, int *rgb2, int dis, int i)
 	r = get_r_g_b(rgb1[0], rgb2[0], dis, i);
 	g = get_r_g_b(rgb1[1], rgb2[1], dis, i);
 	b = get_r_g_b(rgb1[2], rgb2[2], dis, i);
-	return (rgb_to_decimal(r, g, b));
+	return (r << 16 | g << 8 | b);
 }

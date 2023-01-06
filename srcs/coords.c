@@ -6,17 +6,17 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:54:26 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 15:21:50 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 22:41:25 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_header.h"
 
-void	link_to_down_nodes(t_points **points)
+void	link_to_down_nodes(t_points_node **points)
 {
-	t_points	*tmp1;
-	t_points	*tmp2;
-	int			i;
+	t_points_node	*tmp1;
+	t_points_node	*tmp2;
+	int				i;
 
 	i = -1;
 	while (points[++i] && points[i + 1])
@@ -32,28 +32,26 @@ void	link_to_down_nodes(t_points **points)
 	}
 }
 
-t_points	**get_coords(t_mlx_data *mlx_d, int z_s_i[3], float d)
+t_points_node	**get_coords(t_mlx_data *mlx)
 {
-	t_points	**points;
-	char		**line;
-	int			i;
-	int			j;
-	int			x_y_z_i[4];
+	t_points_node	**points;
+	char			**line;
+	int				i;
+	int				j;
+	int				x_y[2];
 
-	x_y_z_i[2] = z_s_i[0];
-	x_y_z_i[3] = z_s_i[2];
-	points = ft_calloc(mlx_d->y_count + 1, sizeof(t_points *));
+	points = ft_calloc(mlx->y_count + 1, sizeof(t_points_node *));
 	i = -1;
-	while (++i < mlx_d->y_count)
+	while (++i < mlx->y_count)
 	{
 		j = -1;
-		line = ft_split(ft_strdup(mlx_d->lines[i]), ' ');
+		line = ft_split(ft_strdup(mlx->lines[i]), ' ');
 		while (line[++j])
 		{
-			x_y_z_i[0] = (((mlx_d->img_w + 10 * z_s_i[1])
-						/ mlx_d->x_count) * j + mlx_d->img_w / 2);
-			x_y_z_i[1] = ((mlx_d->img_h + 10 * z_s_i[1]) / mlx_d->y_count * i);
-			add_node(&points[i], line[j], x_y_z_i, d);
+			x_y[0] = (((mlx->img_w + 10 * mlx->z_s_i_d.s)
+						/ mlx->x_count) * j + mlx->img_w / 2);
+			x_y[1] = ((mlx->img_h + 10 * mlx->z_s_i_d.s) / mlx->y_count * i);
+			add_node(&points[i], line[j], x_y, mlx->z_s_i_d);
 		}
 		free(line);
 	}

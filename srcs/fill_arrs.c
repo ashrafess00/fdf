@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:06:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 14:40:39 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:47:15 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ indexes:
 	8 -> b
 */
 
-void	fill_points_arr(int *points_arr, t_points *points)
+void	fill_points_arr(int *points_arr, t_points_node *points)
 {
 	points_arr[0] = points->x;
 	points_arr[1] = points->y;
