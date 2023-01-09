@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 12:57:14 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 23:34:33 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:55:12 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FDF_HEADER_H
 # include "mlx.h"
 # include "libft.h"
-# include <stdlib.h>
 # include <math.h>
 # include <fcntl.h>
 # define DEFAULT_Z 3
@@ -89,8 +88,5 @@ void			iso2(int *x, int *y, int z);
 int				close_win(t_mlx_data *my_mlx);
 int				hex_to_rgb(char *hex, int white);
 int				get_color(int rgb1, int rgb2, int dis, int i);
-void			fill_info_arr(int *infos, int *fp, int *sp);
-void			fill_color_arr(int *rgb1, int *rgb2, int *fp, int *sp);
-void			fill_points_arr(int *points_arr, t_points_node *points);
 void			draw_on_img(t_mlx_data *data, int x, int y, int color);
 #endif

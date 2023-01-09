@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:35:03 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 00:14:16 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:51:36 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**read_file(t_mlx_data *mlx_data, int fd)
 
 	line = get_next_line(fd);
 	if (!line)
-		write_error("where is the map hhh");
+		write_error("where is the map ?? :)");
 	mlx_data->x_count = count_xm(line);
 	mlx_data->y_count = 1;
 	string = ft_calloc(1, 1);

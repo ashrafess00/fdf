@@ -5,7 +5,7 @@ SRCS_LIST=main.c coords.c draw.c init_window.c read_file.c manage_nodes.c bresen
 OBJS=$(addprefix $(OBJS_DIR), $(SRCS_LIST:.c=.o))
 LIBFT_DIR=libft/
 LIBFT=$(LIBFT_DIR)libft.a
-
+HEADERS_DIR=headers/
 MLX_DIR=mlx/
 MLXLIB=$(MLX_DIR)libmlx.a
 
@@ -26,9 +26,6 @@ $(NAME):$(OBJS) $(LIBFT)
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
-# $(MLXLIB):
-# 	$(MAKE) -C $(MLX_DIR)
-
 $(OBJS_DIR)%.o:$(SRCS_DIR)%.c
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $^
 
@@ -41,3 +38,8 @@ fclean:clean
 	$(RM) $(NAME)
 
 re:fclean all
+
+norm:
+	norminette $(SRCS_DIR) $(LIBFT_DIR) $(HEADERS_DIR)
+
+.PHONY: all clean fclean re norm
