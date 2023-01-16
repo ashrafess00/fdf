@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 18:10:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 22:39:23 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:19:37 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,19 @@ void	draw_me(t_mlx_data *my_mlx)
 		(win_size(my_mlx->img_w) - my_mlx->img_w) / 2,
 		(win_size(my_mlx->img_h) - my_mlx->img_h) / 2);
 	mlx_string_put(my_mlx->mlx, my_mlx->win, 10, 10, 0xffbb00,
-		"click [up key] to increase attitude");
+		"click [+] to increase attitude");
 	mlx_string_put(my_mlx->mlx, my_mlx->win, 10, 30, 0xffbb00,
-		"click [down key] down to decrease attitude");
+		"click [-] down to decrease attitude");
 	mlx_string_put(my_mlx->mlx, my_mlx->win, 10, 50, 0xffbb00,
-		"click [right key] to increase size");
+		"[scrol up] to zoom in");
 	mlx_string_put(my_mlx->mlx, my_mlx->win, 10, 70, 0xffbb00,
-		"click [left key] to decrease size");
+		"[scrol down] to zoom out");
 	mlx_string_put(my_mlx->mlx, my_mlx->win, 10, 90, 0xffbb00,
-		"click [+] to increase degree");
+		"click [key up] to translate up");
 	mlx_string_put(my_mlx->mlx, my_mlx->win, 10, 110, 0xffbb00,
-		"click [-] to decrease degree");
+		"click [key down] to translate down");
 	mlx_string_put(my_mlx->mlx, my_mlx->win, 10, 130, 0xffbb00,
-		"click [i] to switch iso model");
+		"click [key right] to translate right");
+	mlx_string_put(my_mlx->mlx, my_mlx->win, 10, 150, 0xffbb00,
+		"click [key left] to translate left");
 }

@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 18:21:03 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 19:34:35 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:35:41 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,34 +40,37 @@ int	close_win(t_mlx_data *my_mlx)
 	return (1);
 }
 
-static void	switch_i(int *i)
+int	scroll(int key, int x, int y, t_mlx_data *my_mlx)
 {
-	if (*i)
-		*i = 0;
-	else
-		*i = 1;
+	(void) x;
+	(void) y;
+	if (key == 5)
+		my_mlx->z_s_i_d.s += 50;
+	if (key == 4)
+		my_mlx->z_s_i_d.s -= 50;
+	if (key == 5 || key == 4)
+		redraw_image(my_mlx);
+	return (1);
 }
 
 int	move(int key, t_mlx_data *my_mlx)
 {
 	if (key == 53)
 		close_win(my_mlx);
-	if (key == 126)
+	if (key == 69)
 		my_mlx->z_s_i_d.z += 1;
-	if (key == 125)
+	if (key == 78)
 		my_mlx->z_s_i_d.z -= 1;
 	else if (key == 124)
-		my_mlx->z_s_i_d.s += 1;
+		my_mlx->z_s_i_d.t[0] += 20;
 	else if (key == 123)
-		my_mlx->z_s_i_d.s -= 1;
-	else if (key == 69)
-		my_mlx->z_s_i_d.d += 0.1;
-	else if (key == 78)
-		my_mlx->z_s_i_d.d -= 0.1;
-	else if (key == 34)
-		switch_i(&my_mlx->z_s_i_d.i);
-	if (key == 126 || key == 125 || key == 124
-		|| key == 123 || key == 78 || key == 69 || key == 34)
+		my_mlx->z_s_i_d.t[0] -= 20;
+	else if (key == 126)
+		my_mlx->z_s_i_d.t[1] -= 20;
+	else if (key == 125)
+		my_mlx->z_s_i_d.t[1] += 20;
+	if (key == 69 || key == 78 || key == 124 || key == 123
+		|| key == 125 || key == 126)
 		redraw_image(my_mlx);
 	return (1);
 }

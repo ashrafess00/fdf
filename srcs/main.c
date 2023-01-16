@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:21:42 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 22:39:07 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:35:17 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	initiate__z_s_i(t__z_s_i_d *z_s_i_d)
 {
 	z_s_i_d->z = DEFAULT_Z;
 	z_s_i_d->s = DEFAULT_S;
-	z_s_i_d->i = DEFAULT_I;
-	z_s_i_d->d = DEFAULT_D;
+	z_s_i_d->t[0] = DEFAULT_T;
+	z_s_i_d->t[1] = DEFAULT_T;
 }
 
 int	main(int c, char **args)
@@ -56,6 +56,7 @@ int	main(int c, char **args)
 		my_mlx.z_s_i_d.s = ft_atoi(args[3]);
 	draw_me(&my_mlx);
 	mlx_key_hook(my_mlx.win, &move, &my_mlx);
+	mlx_mouse_hook(my_mlx.win, &scroll, &my_mlx);
 	mlx_hook(my_mlx.win, 17, 0, &close_win, &my_mlx);
 	mlx_loop(my_mlx.mlx);
 	return (0);
