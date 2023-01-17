@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 12:57:14 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/16 15:35:51 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:57:34 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ typedef struct s_point__1_2
 	int		rgb2;
 }	t_point__1_2;
 
-typedef struct s__z_s_i_d
+typedef struct s__z_s_t
 {
 	int		z;
 	int		s;
 	int		t[2];
-}	t__z_s_i_d;
+}	t__z_s_t;
 
 typedef struct s_mlx_data
 {
@@ -68,12 +68,12 @@ typedef struct s_mlx_data
 	int				y_count;
 	t_points_node	**points;
 	char			**lines;
-	t__z_s_i_d		z_s_i_d;
+	t__z_s_t		z_s_t;
 }	t_mlx_data;
 
 t_points_node	**get_coords(t_mlx_data *mlx_d);
 void			add_node(t_points_node **head, char *num, int x_y[2],
-					t__z_s_i_d z_s_i_d);
+					t__z_s_t z_s_t);
 char			**read_file(t_mlx_data *mlx_data, int fd);
 void			init_draw(t_mlx_data *my_mlx, t_points_node **points);
 void			intiate_window(t_mlx_data *my_mlx);

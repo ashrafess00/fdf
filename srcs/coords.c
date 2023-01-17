@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:54:26 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/16 15:25:31 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:57:34 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ t_points_node	**get_coords(t_mlx_data *mlx)
 			write_error("an error occured :(\n");
 		while (line[++j])
 		{
-			x_y[0] = (((mlx->img_w + mlx->z_s_i_d.s)
+			x_y[0] = (((mlx->img_w + mlx->z_s_t.s)
 						/ mlx->x_count) * j + mlx->img_w / 2);
-			x_y[1] = ((mlx->img_h + mlx->z_s_i_d.s) / mlx->y_count * i);
-			add_node(&points[i], line[j], x_y, mlx->z_s_i_d);
+			x_y[1] = ((mlx->img_h + mlx->z_s_t.s) / mlx->y_count * i);
+			add_node(&points[i], line[j], x_y, mlx->z_s_t);
 		}
 		free(line);
 	}

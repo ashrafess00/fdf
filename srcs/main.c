@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:21:42 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/16 15:35:17 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:58:00 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static int	is_number(char *s)
 	return (1);
 }
 
-static void	initiate__z_s_i(t__z_s_i_d *z_s_i_d)
+static void	initiate__z_s_t(t__z_s_t *z_s_t)
 {
-	z_s_i_d->z = DEFAULT_Z;
-	z_s_i_d->s = DEFAULT_S;
-	z_s_i_d->t[0] = DEFAULT_T;
-	z_s_i_d->t[1] = DEFAULT_T;
+	z_s_t->z = DEFAULT_Z;
+	z_s_t->s = DEFAULT_S;
+	z_s_t->t[0] = DEFAULT_T;
+	z_s_t->t[1] = DEFAULT_T;
 }
 
 int	main(int c, char **args)
@@ -44,16 +44,16 @@ int	main(int c, char **args)
 	fd = open(args[1], O_RDONLY);
 	my_mlx.lines = read_file(&my_mlx, fd);
 	intiate_window(&my_mlx);
-	initiate__z_s_i(&my_mlx.z_s_i_d);
+	initiate__z_s_t(&my_mlx.z_s_t);
 	if ((args[2] && is_number(args[2])) && (args[3] && is_number(args[3])))
 	{
-		my_mlx.z_s_i_d.z = ft_atoi(args[2]);
-		my_mlx.z_s_i_d.s = ft_atoi(args[3]);
+		my_mlx.z_s_t.z = ft_atoi(args[2]);
+		my_mlx.z_s_t.s = ft_atoi(args[3]);
 	}
 	else if (args[2] && is_number(args[2]))
-		my_mlx.z_s_i_d.z = ft_atoi(args[2]);
+		my_mlx.z_s_t.z = ft_atoi(args[2]);
 	else if (args[3] && is_number(args[3]))
-		my_mlx.z_s_i_d.s = ft_atoi(args[3]);
+		my_mlx.z_s_t.s = ft_atoi(args[3]);
 	draw_me(&my_mlx);
 	mlx_key_hook(my_mlx.win, &move, &my_mlx);
 	mlx_mouse_hook(my_mlx.win, &scroll, &my_mlx);

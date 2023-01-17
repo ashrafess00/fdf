@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:00:42 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/16 15:34:16 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:57:34 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	fill_colour(int *color_rgb, char *num)
 }
 
 void	add_node(t_points_node **head, char *num, int x_y[2],
-t__z_s_i_d z_s_i_d)
+t__z_s_t z_s_t)
 {
 	t_points_node	*temp;
 	int				color_rgb;
@@ -56,10 +56,10 @@ t__z_s_i_d z_s_i_d)
 	char			**num_splitted;
 
 	num_splitted = ft_split(ft_strdup(num), ',');
-	splitted_z = ft_atoi(num_splitted[0]) * z_s_i_d.z;
+	splitted_z = ft_atoi(num_splitted[0]) * z_s_t.z;
 	iso1 (&x_y[0], &x_y[1], splitted_z, DEFAULT_D);
-	x_y[0] += z_s_i_d.t[0];
-	x_y[1] += z_s_i_d.t[1];
+	x_y[0] += z_s_t.t[0];
+	x_y[1] += z_s_t.t[1];
 	fill_colour(&color_rgb, num);
 	if (*head == NULL)
 		*head = create_node(x_y[0], x_y[1], splitted_z, color_rgb);
