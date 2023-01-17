@@ -10,18 +10,22 @@ MLX_DIR=mlx/
 MLXLIB=$(MLX_DIR)libmlx.a
 
 CC=gcc
-CFLAGS=-Wall -O3 -Wextra -Werror
-INC=-I./headers/ -I./mlx/ -I./libft/
+CFLAGS=-Wall -Wextra -Werror
+INC=-I./headers/  -I./libft/
 
 RM=rm -rf
+
+
 all:$(OBJS_DIR) $(NAME) 
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR) 
 
 $(NAME):$(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
+$(MLX):
+	$(MAKE) -C ./mlx
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
