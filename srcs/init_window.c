@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:21:55 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/16 15:34:43 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:34:36 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ void	intiate_window(t_mlx_data *my_mlx)
 		write_error("an error occured :(\n");
 	my_mlx->addr = mlx_get_data_addr(my_mlx->img, &my_mlx->bits_per_pixel,
 			&my_mlx->line_length, &my_mlx->endian);
-	if (!my_mlx->mlx)
+	if (!my_mlx->addr)
 		write_error("an error occured :(\n");
 }
