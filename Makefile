@@ -9,12 +9,11 @@ HEADERS_DIR=headers/
 MLX_DIR=mlx/
 MLXLIB=$(MLX_DIR)libmlx.a
 
-CC=gcc
+CC=cc
 CFLAGS=-Wall -Wextra -Werror
 INC=-I./headers/  -I./libft/
 
 RM=rm -rf
-
 
 all:$(OBJS_DIR) $(NAME) 
 
@@ -42,8 +41,5 @@ fclean:clean
 	$(RM) $(NAME)
 
 re:fclean all
-
-norm:
-	norminette $(SRCS_DIR) $(LIBFT_DIR) $(HEADERS_DIR)
 
 .PHONY: all clean fclean re norm

@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:48:42 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/06 00:21:29 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:41:19 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	*ft_memchr(const void *s, int c, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 void	ft_bzero(void *s, int n);
 void	*ft_calloc(size_t count, size_t size);
-int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
@@ -81,5 +80,4 @@ int		ft_putchar(unsigned char c);
 int		ft_putnbr(long int num, char *base);
 int		ft_putnbru(unsigned long int num, char *base);
 int		ft_putstr(char *str);
-int		ft_max(int a, int b);
 #endif
